@@ -1,0 +1,27 @@
+.nav-link{
+    display: inline;
+}
+
+.offcanvas{
+    --bs-offcanvas-width: 200px;
+}
+
+.navbar {
+    background-color: #1A237E;
+}
+
+.navbar-toggler{
+    background-color: #E0E0E0;
+}
+
+.offcanvas-header, .offcanvas-body{
+    background-color: #E0E0E0;
+}
+
+body{
+    background-color: #E0E0E0;
+}
+
+.rtdev{
+    width: 12.5%;
+}
