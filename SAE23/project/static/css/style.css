@@ -8,7 +8,6 @@
 
 .navbar {
     background-color: #202cae;
-    height: 7rem;
 }
 
 .navbar-toggler{
@@ -24,10 +23,9 @@ body{
 }
 
 .rtdev{
-    width: 12.5%;
+    height: 4rem;
 }
 
 .longueur{
-    padding-top: 7rem;
-    height: 70rem;
+    height: 6rem;
 }
