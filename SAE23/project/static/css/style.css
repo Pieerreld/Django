@@ -10,6 +10,15 @@
     background-color: #101762;
 }
 
+.navbar-brand{
+    color: white;
+    text-transform: uppercase;
+}
+
+.navbar-brand:hover{
+    color: white;
+}
+
 .navbar-toggler{
     background-color: #E0E0E0;
 }
@@ -19,7 +28,8 @@
 }
 
 body{
-    background-color: #E0E0E0;
+    background-color: #212529;
+    color: white;
 }
 
 .rtdev{
@@ -28,4 +38,19 @@ body{
 
 .longueur{
     height: 6rem;
+}
+
+.table{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 40%;
+}
+
+.img1{
+    background-image: url("../images/people.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
 }

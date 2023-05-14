@@ -1,0 +1,54 @@
+<nav class="navbar fixed-top">
+    <div class="container-fluid">
+        {% load static %}
+      <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
+      <h1 class="navbar-brand fs-2 fw-semibold text-center ">Projet Django</h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav nav-underline flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Machines</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'liste_personnel' %}">Personnels</a>
+            </li>
+          </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="longueur"></div>
+
+{% block content %} 
+    {% if personnels %}
+        <table class="table table-dark table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Poste</th>
+            </tr>
+        {% for personnel in personnels %}
+            <tr>
+                <td>{{ personnel.id }} </td>
+                <td>{{ personnel.nom }}</td>
+                <td>{{ personnel.prenom }}</td>
+                <td>{{ personnel.poste }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% else %}
+        <p>Il n'y a pas de personnel.</p>
+    {% endif %}
+{% endblock %} 
