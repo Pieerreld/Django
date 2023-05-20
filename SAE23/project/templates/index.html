@@ -13,33 +13,42 @@
 <body>
     <!--MENU-->
     {% block sidebar %}
-    <div id="carouselExampleIndicators" class="carousel slide">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <div class="container px-4 py-5 " id="custom-cards">
+      <div class="container navbar index_navbar border-bottom">
+      <h2 class="pb-2">IT Management</h2>
+      <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active img1">
-          <div class="card">
-            <div class="card-body">
-              This is some text within a card body.
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
 
+      <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+        <div class="col">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 index_div1" style="background-image: url('../static/images/machine.png');">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+              <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold index_h3">Visionner la liste des machines et leurs informations</h3>
+                  <a href="{% url 'liste_machine' %}"><button class="btn btn-primary" type="button">Accéder</button></a>
+            </div>
+          </div>
         </div>
-        <div class="carousel-item img2">
-          
+
+        <div class="col">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 index_div2" style="background-image: url('../static/images/people.png');">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+              <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold index_h3">Visionner la liste du personnel et leurs informations</h3>
+                  <a href="{% url 'liste_personnel' %}"><button class="btn btn-primary" type="button">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 index_div3" style="background-image: url('../static/images/viewjpg.jpg');">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+              <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold index_h3">Vision et informations du personnel et des machines.</h3>
+                  <a href="#"><button class="btn btn-primary" type="button">Accéder</button></a>
+            </div>
+          </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
       {% endblock %}
+      {% block content %}
+      {% endblock %} 
 </body>
 </html>

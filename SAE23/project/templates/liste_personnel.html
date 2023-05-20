@@ -1,8 +1,10 @@
-<nav class="navbar fixed-top">
+{% extends "index.html" %}
+{% block sidebar %}
+  <nav class="navbar nvbar fixed-top">
     <div class="container-fluid">
         {% load static %}
       <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
-      <h1 class="navbar-brand fs-2 fw-semibold text-center ">Projet Django</h1>
+      <h1 class="navbar-brand fs-2 fw-semibold text-center ">IT MANAGEMENT</h1>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -14,13 +16,13 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav nav-underline flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Accueil</a>
+              <a class="nav-link" aria-current="page" href="{% url 'index' %}">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Machines</a>
+              <a class="nav-link" href="{% url 'liste_machine' %}">Machines</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'liste_personnel' %}">Personnels</a>
+              <a class="nav-link" href="{% url 'liste_personnel' %}">Personnels</a>
             </li>
           </ul>
           </form>
@@ -29,6 +31,7 @@
     </div>
   </nav>
   <div class="longueur"></div>
+  {% endblock %}
 
 {% block content %} 
     {% if personnels %}
@@ -38,6 +41,7 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Poste</th>
+                <th>Etat</th>
             </tr>
         {% for personnel in personnels %}
             <tr>
@@ -45,6 +49,7 @@
                 <td>{{ personnel.nom }}</td>
                 <td>{{ personnel.prenom }}</td>
                 <td>{{ personnel.poste }}</td>
+                <td>{{ personnel.etat }}</td>
             </tr>
         {% endfor %}
         </table>
