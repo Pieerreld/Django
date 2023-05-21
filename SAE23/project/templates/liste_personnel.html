@@ -33,27 +33,25 @@
   <div class="longueur"></div>
   {% endblock %}
 
-{% block content %} 
-    {% if personnels %}
-        <table class="table table-dark table-striped">
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Poste</th>
-                <th>Etat</th>
-            </tr>
-        {% for personnel in personnels %}
-            <tr>
-                <td>{{ personnel.id }} </td>
-                <td>{{ personnel.nom }}</td>
-                <td>{{ personnel.prenom }}</td>
-                <td>{{ personnel.poste }}</td>
-                <td>{{ personnel.etat }}</td>
-            </tr>
-        {% endfor %}
-        </table>
-        {% else %}
-        <p>Il n'y a pas de personnel.</p>
-    {% endif %}
+  {% block content %} 
+  {% if personnels %}
+      <div class="container px-4 py-5" id="hanging-icons">
+          <h2 class="pb-2 border-bottom">Liste du personnel</h2>
+          <div class="row g-4 py-5 row-cols-1 row-cols-lg-5">
+              {% for personnel in personnels %}
+                  <div class="col d-flex align-items-start mach_block">
+                      <div>
+                      <h3 class="fs-2">{{ personnel.nom}} {{personnel.prenom}}</h3>
+                      <p></p>
+                      <a href="{% url 'personnel_view' personnel.id %}" class="btn btn-primary">
+                          {{ personnel.id}}
+                      </a>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+      </div>
+      {% else %}
+      <p>Il n'y a pas de personnels.</p>
+  {% endif %}
 {% endblock %} 

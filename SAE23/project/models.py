@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from django.db import models
 from django.urls import reverse
 
@@ -43,7 +43,7 @@ class Machine(models.Model):
 
     id = models.AutoField(primary_key=True, editable=False)
     nom = models.CharField(max_length=40)
-    maintenanceDate = models.DateField()
+    maintenanceDate = models.DateField(default=date.today)
     mach = models.CharField(max_length=32, choices=TYPE, default='PC')
-    personnel = models.ForeignKey(Personnel, on_delete=models.SET_DEFAULT, default=0)
+    personnel = models.ForeignKey(Personnel, on_delete=models.SET_DEFAULT, default=1)
     etat = models.CharField(max_length=16, choices=ETAT, default='en ligne')

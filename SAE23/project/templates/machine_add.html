@@ -1,0 +1,39 @@
+{% extends "machine_view.html" %} 
+{% load static %}
+{% block menu %} 
+    <div class="container navbar index_navbar border-bottom">
+        <h2 class="pb-2">IT Management</h2>
+        <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
+    </div>
+    <nav class="machine_view" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>
+          <li class="breadcrumb-item" aria-current="page">Gestion Machine</li>
+        </ol>
+      </nav>
+{% endblock %} 
+
+{%block content %}
+<form method="post">
+    {% csrf_token %} 
+    {{ form.nom.label_tag }}
+    {{ form.nom }}
+  
+    <label for="{{ form.mach.id_for_label }}">Type de la machine:</label>
+    <select name="{{ form.mach.name }}" id="{{ form.mach.id_for_label }}">
+      {% for choice in form.mach.field.choices %}
+        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+      {% endfor %}
+    </select>
+
+    <select name="{{ form.etat.name }}" id="{{ form.etat.id_for_label }}">
+        {% for choice in form.etat.field.choices %}
+          <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+        {% endfor %}
+      </select>
+  
+    <input type="submit" value="Create Machine">
+  </form>
+
+
+{% endblock %} 

@@ -7,7 +7,7 @@
 }
 
 .nvbar {
-    background-color: rgba(4, 4, 213, 0.4);
+    background-color: rgb(4, 4, 213);
 }
 
 .navbar-brand{
@@ -80,4 +80,10 @@ body{
 
 .mach_block{
     margin: 1.744rem;
+}
+
+.machine_view{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 30px;
 }

@@ -1,0 +1,26 @@
+{% extends "machine_view.html" %}
+{% load static %}
+{% block menu %} 
+    <div class="container navbar index_navbar border-bottom">
+        <h2 class="pb-2">IT Management</h2>
+        <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
+    </div>
+    <nav class="machine_view" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'liste_machine' %}">Liste Personnel</a></li>
+          <li class="breadcrumb-item" aria-current="page">{{personnel.nom}} {{personnel.prenom}}</li>
+        </ol>
+      </nav>
+{% endblock %} 
+
+{%block content %}
+    <div class="card text-bg-primary mb-3 container" style="max-width: 25rem;">
+        <div class="card-header">{{personnel.id}}</div>
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{personnel.nom}} {{personnel.prenom}}</strong></h5>
+          <p class="card-text"> Poste occupé : {{personnel.poste}}</p>
+          <p class="card-text"> Etat de l'utilisateur : {{personnel.etat}}</p>
+        </div>
+    </div>
+{% endblock %} 
