@@ -22,5 +22,6 @@
           <p class="card-text"> Poste occupé : {{personnel.poste}}</p>
           <p class="card-text"> Etat de l'utilisateur : {{personnel.etat}}</p>
         </div>
+        <a class="btn btn-primary" href="{% url 'supprimer_personnel' personnel.id %}" role="button">Supprimer</a>
     </div>
 {% endblock %} 

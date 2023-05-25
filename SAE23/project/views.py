@@ -3,6 +3,7 @@ from project.models import Personnel
 from project.models import Machine
 from django.shortcuts import get_object_or_404
 from .forms import AddMachineForm
+from .forms import AddPersonnelForm
 
 def index(request) :
     
@@ -44,6 +45,13 @@ def supprimer_machine(request, pk):
         return redirect('liste_machine')
     return render(request, 'templates/supprimer_machine.html', {'machine': machine})
 
+def supprimer_personnel(request, pk):
+    personnel = get_object_or_404(Personnel, id=pk)
+    if request.method =='POST':
+        personnel.delete()
+        return redirect('liste_personnel')
+    return render(request, 'templates/supprimer_personnel.html', {'personnel': personnel})
+
 def machine_add_form(request):
     if request.method == 'POST':
         form = AddMachineForm(request.POST or None)
@@ -54,4 +62,16 @@ def machine_add_form(request):
     else:
         form = AddMachineForm()
     context = {'form': form}
-    return render(request, 'templates/machine_add.html', context)
+    return render(request, 'templates/add.html', context)
+
+def personnel_add_form(request):
+    if request.method == 'POST':
+        form = AddPersonnelForm(request.POST or None)
+        if form.is_valid():
+            new_personnel = Personnel(nomm=form.cleaned_data['nom'], prenom=form.cleaned_data['prenom'], poste=form.cleaned_data['poste'], etatt=form.cleaned_data['etatt'])
+            new_personnel.save()
+            return redirect('liste_personnel') 
+    else:
+        form = AddPersonnelForm()
+    context = {'form': form}
+    return render(request, 'templates/add.html', context)
