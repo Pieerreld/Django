@@ -37,6 +37,13 @@ def personnel_view(request, pk):
     return render (request,
             'templates/personnel_view.html', context)
 
+def supprimer_machine(request, pk):
+    machine = get_object_or_404(Machine, id=pk)
+    if request.method =='POST':
+        machine.delete()
+        return redirect('liste_machine')
+    return render(request, 'templates/supprimer_machine.html', {'machine': machine})
+
 def machine_add_form(request):
     if request.method == 'POST':
         form = AddMachineForm(request.POST or None)

@@ -36,5 +36,9 @@
           <p class="card-text"> Type de machine : {{machine.mach}}</p>
           <p class="card-text"> Etat de la machine : {{machine.etat}}</p>
         </div>
+        <a class="btn btn-primary" href="{% url 'supprimer_machine' machine.id %}" role="button">Supprimer</a>
     </div>
+
+    
+
     {% endblock %} 

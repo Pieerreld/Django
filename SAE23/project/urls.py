@@ -14,4 +14,7 @@ urlpatterns = [
     path('machine_add',
         views.machine_add_form,
         name='machine_add'),
+     path('supprimer_machine/<pk>',
+          views.supprimer_machine,
+          name='supprimer_machine'),
 ]
