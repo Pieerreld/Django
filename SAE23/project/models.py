@@ -25,6 +25,9 @@ class Personnel(models.Model):
     poste = models.CharField(max_length=32, choices=POSTE, default='Employee')
     etat = models.CharField(max_length= 16, choices=ETAT, default='connecte')
 
+    def __str__(self):
+        return f"{self.nom} {self.prenom}"
+
     
 class Machine(models.Model):
 

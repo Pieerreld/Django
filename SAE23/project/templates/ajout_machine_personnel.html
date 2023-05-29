@@ -32,28 +32,43 @@
       <div class="modal-body">
         <form method="post">
           {% csrf_token %} 
-          {{ form.nom.label_tag }}
-          {{ form.nom }}
+          <div>
+          {{ machine_form.nom.label_tag }}
+          {{ machine_form.nom }}
+          </div>
         
-          <label for="{{ form.mach.id_for_label }}">Type de la machine:</label>
-          <select name="{{ form.mach.name }}" id="{{ form.mach.id_for_label }}">
-            {% for choice in form.mach.field.choices %}
+          <div>
+          <label for="{{ machine_form.mach.id_for_label }}">Type de la machine:</label>
+          <select name="{{ machine_form.mach.name }}" id="{{ machine_form.mach.id_for_label }}">
+            {% for choice in machine_form.mach.field.choices %}
               <option value="{{ choice.0 }}">{{ choice.1 }}</option>
             {% endfor %}
           </select>
-      
-          <select name="{{ form.etat.name }}" id="{{ form.etat.id_for_label }}">
-              {% for choice in form.etat.field.choices %}
+          </div>
+          
+          <div>
+          <label for="{{ machine_form.etat.id_for_label }}">Etat de la machine:</label>
+          <select name="{{ machine_form.etat.name }}" id="{{ machine_form.etat.id_for_label }}">
+              {% for choice in machine_form.etat.field.choices %}
                 <option value="{{ choice.0 }}">{{ choice.1 }}</option>
               {% endfor %}
+          </select>
+          </div>
+
+          <div>
+            <label for="{{ machine_form.personnel.id_for_label }}">Propriétaire de la machine:</label>
+            <select name="{{ machine_form.personnel.name }}" id="{{ machine_form.personnel.id_for_label }}">
+                {% for choice in machine_form.personnel.field.choices %}
+                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
             </select>
+            </div>
         
-          <input type="submit" value="Create Machine">
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <input type="submit" class="btn btn-primary" name="machine_submit" value="Create Machine">
+      </form>
       </div>
     </div>
   </div>
@@ -69,37 +84,43 @@
       <div class="modal-body">
         <form method="post">
           {% csrf_token %} 
-          {{ form.nomm.label_tag }}
-          {{ form.prenom.label_tag }}
-        
-          <label for="{{ form.poste.id_for_label }}">Titre du poste:</label>
-          <select name="{{ form.poste.name }}" id="{{ form.poste.id_for_label }}">
-            {% for choice in form.poste.field.choices %}
+          <div>
+          {{ personnel_form.nom.label_tag }}
+          {{ personnel_form.nom }}
+          </div>
+          <div>
+          {{ personnel_form.prenom.label_tag }}
+          {{ personnel_form.prenom }}
+          </div>
+          
+          <div>
+          <label for="{{ personnel_form.poste.id_for_label }}">Titre du poste:</label>
+          <select name="{{ personnel_form.poste.name }}" id="{{ personnel_form.poste.id_for_label }}">
+            {% for choice in personnel_form.poste.field.choices %}
               <option value="{{ choice.0 }}">{{ choice.1 }}</option>
             {% endfor %}
           </select>
-      
-          <select name="{{ form.etatt.name }}" id="{{ form.etatt.id_for_label }}">
-              {% for choice in form.etatt.field.choices %}
+          </div>
+          
+          <div>
+          <label for="{{ personnel_form.etat.id_for_label }}">Etat du personnel:</label>
+          <select name="{{ personnel_form.etat.name }}" id="{{ personnel_form.etat.id_for_label }}">
+              {% for choice in personnel_form.etat.field.choices %}
                 <option value="{{ choice.0 }}">{{ choice.1 }}</option>
               {% endfor %}
-            </select>
+          </select>
+          </div>
         
-          <input type="submit" value="Create Machine">
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <input type="submit" class="btn btn-primary" name="personnel_submit" value="Create Personnel">
+      </form>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Vertically centered scrollable modal -->
-<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-  ...
-</div>
 
 
 {% endblock %} 

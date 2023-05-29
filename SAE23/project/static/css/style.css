@@ -87,3 +87,46 @@ body{
     margin-bottom: 2rem;
     margin-left: 30px;
 }
+
+.modal-content {
+    background-color: #212529;
+    color: #fff;
+  }
+  
+  .modal-header,
+  .modal-footer {
+    border-color: #212529;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+
+  .icon-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .icon-container a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+  }
+  
+  .icon-container a:hover{
+    background-color: cornflowerblue;
+  }
+
+  

@@ -1,0 +1,11 @@
+{% extends "liste_personnel.html" %}
+
+{% block content %} 
+<div id="chatbot-container">
+    <div id="chatbot-messages"></div>
+    <input type="text" id="chatbot-input" placeholder="Posez votre question..."/>
+    <button id="chatbot-send-btn">Envoyer</button>
+</div>
+
+<script src="openai-chatbot.js"></script>
+{% endblock %} 

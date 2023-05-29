@@ -52,26 +52,34 @@ def supprimer_personnel(request, pk):
         return redirect('liste_personnel')
     return render(request, 'templates/supprimer_personnel.html', {'personnel': personnel})
 
-def machine_add_form(request):
-    if request.method == 'POST':
-        form = AddMachineForm(request.POST or None)
-        if form.is_valid():
-            new_machine = Machine(nom=form.cleaned_data['nom'], mach=form.cleaned_data['mach'], etat=form.cleaned_data['etat'])
-            new_machine.save()
-            return redirect('liste_machine') 
-    else:
-        form = AddMachineForm()
-    context = {'form': form}
-    return render(request, 'templates/add.html', context)
 
-def personnel_add_form(request):
+
+def add_machine_personnel(request):
+    machine_form = AddMachineForm()
+    personnel_form = AddPersonnelForm()
     if request.method == 'POST':
-        form = AddPersonnelForm(request.POST or None)
-        if form.is_valid():
-            new_personnel = Personnel(nomm=form.cleaned_data['nom'], prenom=form.cleaned_data['prenom'], poste=form.cleaned_data['poste'], etatt=form.cleaned_data['etatt'])
-            new_personnel.save()
-            return redirect('liste_personnel') 
+        if 'machine_submit' in request.POST:
+            machine_form = AddMachineForm(request.POST)
+            if machine_form.is_valid():
+                new_machine = Machine(nom=machine_form.cleaned_data['nom'], mach=machine_form.cleaned_data['mach'], etat=machine_form.cleaned_data['etat'])
+                new_machine.save()
+                return redirect('liste_machine')
+
+        if 'personnel_submit' in request.POST:
+            personnel_form = AddPersonnelForm(request.POST)
+            if personnel_form.is_valid():
+                new_personnel = Personnel(nom=personnel_form.cleaned_data['nom'], prenom=personnel_form.cleaned_data['prenom'], poste=personnel_form.cleaned_data['poste'], etat=personnel_form.cleaned_data['etat'])
+                new_personnel.save()
+                return redirect('liste_personnel')
     else:
-        form = AddPersonnelForm()
-    context = {'form': form}
-    return render(request, 'templates/add.html', context)
+        machine_form = AddMachineForm()
+        personnel_form = AddPersonnelForm()
+
+    return render(request, 'templates/ajout_machine_personnel.html', {
+        'machine_form': machine_form,
+        'personnel_form': personnel_form,
+    })
+
+def chatbot(request) :
+
+    return render(request, 'templates/chatbot.html')
