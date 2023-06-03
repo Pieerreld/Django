@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden
 
 
+
 def index(request) :
     
     return render(request, 'templates/index.html')

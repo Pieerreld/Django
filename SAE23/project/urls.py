@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
+
 
 urlpatterns = [
+    path('admin/login/', views.login, name='login'),
+    path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('liste_personnel/', views.liste_personnel, name='liste_personnel'),
     path('liste_machine/', views.liste_machine, name='liste_machine'),
@@ -26,9 +30,6 @@ urlpatterns = [
      path('login',
           views.login,
           name='login'),
-     path('signup',
-          views.signup,
-          name='signup'),
      path('profile',
           views.profile,
           name='profile'),
