@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Django</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body class="log">
+<section class=" gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+              <div class="mb-md-5 mt-md-4 pb-5">
+                {% block content %}
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <p class="text-white-50 mb-5">Entrez votre identifiant et mot de passe !</p>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="text" id="typeIdX" class="form-control form-control-lg" name="username" required/>
+                  <label class="form-label" for="typeIdX">Identifiant</label>
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" name="password" required/>
+                  <label class="form-label" for="typePasswordX">Mot de passe</label>
+                </div>
+  
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+  
+              </div>
+            </form>
+  
+              <div>
+                <p class="mb-0">Pas encore de compte ? <a href="{% url 'signup' %}" class="text-white-50 fw-bold">Inscrivez-vous !</a>
+                </p>
+              </div>
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="icon-container">
+    <a href="{% url 'index' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+          </svg>
+    </a>
+  </div>
+</body>

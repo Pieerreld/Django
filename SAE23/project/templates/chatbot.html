@@ -1,11 +1,79 @@
-{% extends "liste_personnel.html" %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Django</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
 {% block content %} 
-<div id="chatbot-container">
-    <div id="chatbot-messages"></div>
-    <input type="text" id="chatbot-input" placeholder="Posez votre question..."/>
-    <button id="chatbot-send-btn">Envoyer</button>
-</div>
+<style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
 
-<script src="openai-chatbot.js"></script>
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .chatbox {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+
+    .user-input {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+
+    .user-input input {
+      flex: 1;
+      margin-right: 10px;
+    }
+
+    .user-input button {
+      flex-shrink: 0;
+    }
+
+    .user-message {
+      color: blue;
+    }
+
+    .chatbot-message {
+      color: green;
+    }
+  </style>
+
+  <div class="container">
+    <h1>Chatbot</h1>
+    <div class="chatbox" id="chatbox"></div>
+    <div class="user-input">
+      <input type="text" id="userinput" placeholder="Posez une question...">
+      <button class="btn btn-primary" onclick="traiterMessage()">Envoyer</button>
+    </div>
+  </div>
+
+<script src="{% static 'js/chatbot.js' %}"></script>
+
+<div class="icon-container">
+    <a href="{% url 'index' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+          </svg>
+    </a>
+</div>
 {% endblock %} 

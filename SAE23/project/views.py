@@ -1,14 +1,49 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as auth_logout
 from project.models import Personnel
 from project.models import Machine
 from django.shortcuts import get_object_or_404
 from .forms import AddMachineForm
 from .forms import AddPersonnelForm
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponseForbidden
+
 
 def index(request) :
     
     return render(request, 'templates/index.html')
 
+def specific_user_check(user):
+    return user.username == 'admin'
+
+def login(request) :
+    if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                auth_login(request, user)
+                return redirect('index')  # Rediriger vers la page d'accueil après la connexion réussie
+            else:
+                error_message = 'Identifiant ou mot de passe incorrect.'
+                return render(request, 'login.html', {'error_message': error_message})
+    else:
+        return render(request, 'login.html')
+
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'templates/profile.html', {'user': user})
+
+def signup(request) :
+    return render(request, 'templates/signup.html')
+
+def logout(request):
+  auth_logout(request)
+  return redirect('index')
 
 def liste_personnel(request) :
     personnels = Personnel.objects.all()
@@ -38,6 +73,7 @@ def personnel_view(request, pk):
     return render (request,
             'templates/personnel_view.html', context)
 
+@user_passes_test(specific_user_check, login_url='forbidden')
 def supprimer_machine(request, pk):
     machine = get_object_or_404(Machine, id=pk)
     if request.method =='POST':
@@ -45,6 +81,7 @@ def supprimer_machine(request, pk):
         return redirect('liste_machine')
     return render(request, 'templates/supprimer_machine.html', {'machine': machine})
 
+@user_passes_test(specific_user_check, login_url='forbidden')
 def supprimer_personnel(request, pk):
     personnel = get_object_or_404(Personnel, id=pk)
     if request.method =='POST':
@@ -52,8 +89,7 @@ def supprimer_personnel(request, pk):
         return redirect('liste_personnel')
     return render(request, 'templates/supprimer_personnel.html', {'personnel': personnel})
 
-
-
+@user_passes_test(specific_user_check, login_url='forbidden')
 def add_machine_personnel(request):
     machine_form = AddMachineForm()
     personnel_form = AddPersonnelForm()
@@ -81,5 +117,6 @@ def add_machine_personnel(request):
     })
 
 def chatbot(request) :
-
+    machines = Machine.objects.all()
+    context = {'machines': machines}
     return render(request, 'templates/chatbot.html')

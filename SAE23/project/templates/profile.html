@@ -1,0 +1,15 @@
+
+{% block content %}
+  <h2>Profil de {{ user.username }}</h2>
+  <p>Nom d'utilisateur : {{ user.username }}</p>
+  <p>Email : {{ user.email }}</p>
+
+  <form action="{% url 'logout' %}" method="post" id="logout-form" style="display: none;">
+    {% csrf_token %}
+  </form>
+  
+  <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Se déconnecter
+  </button>
+  
+{% endblock %}

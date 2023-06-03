@@ -129,4 +129,28 @@ body{
     background-color: cornflowerblue;
   }
 
-  
+  .icon-person a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+  }
+
+  .icon-person a:hover{
+    background-color: cornflowerblue;
+  }
+
+  .gradient-custom {
+    /* fallback for old browsers */
+    background: #6a11cb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
