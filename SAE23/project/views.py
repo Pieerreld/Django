@@ -9,8 +9,6 @@ from django.shortcuts import get_object_or_404
 from .forms import AddMachineForm
 from .forms import AddPersonnelForm
 from django.contrib.auth.decorators import user_passes_test
-from django.http import HttpResponseForbidden
-
 
 
 def index(request) :
@@ -27,7 +25,11 @@ def login(request) :
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth_login(request, user)
-                return redirect('index')  # Rediriger vers la page d'accueil après la connexion réussie
+                next_page = request.POST.get('next')
+                if next_page:
+                    return redirect(next_page)
+                else:
+                    return redirect('homepage')
             else:
                 error_message = 'Identifiant ou mot de passe incorrect.'
                 return render(request, 'login.html', {'error_message': error_message})
@@ -38,9 +40,6 @@ def login(request) :
 def profile(request):
     user = request.user
     return render(request, 'templates/profile.html', {'user': user})
-
-def signup(request) :
-    return render(request, 'templates/signup.html')
 
 def logout(request):
   auth_logout(request)
@@ -74,7 +73,7 @@ def personnel_view(request, pk):
     return render (request,
             'templates/personnel_view.html', context)
 
-@user_passes_test(specific_user_check, login_url='forbidden')
+@user_passes_test(specific_user_check)
 def supprimer_machine(request, pk):
     machine = get_object_or_404(Machine, id=pk)
     if request.method =='POST':
@@ -82,7 +81,7 @@ def supprimer_machine(request, pk):
         return redirect('liste_machine')
     return render(request, 'templates/supprimer_machine.html', {'machine': machine})
 
-@user_passes_test(specific_user_check, login_url='forbidden')
+@user_passes_test(specific_user_check)
 def supprimer_personnel(request, pk):
     personnel = get_object_or_404(Personnel, id=pk)
     if request.method =='POST':
@@ -90,7 +89,7 @@ def supprimer_personnel(request, pk):
         return redirect('liste_personnel')
     return render(request, 'templates/supprimer_personnel.html', {'personnel': personnel})
 
-@user_passes_test(specific_user_check, login_url='forbidden')
+@user_passes_test(specific_user_check)
 def add_machine_personnel(request):
     machine_form = AddMachineForm()
     personnel_form = AddPersonnelForm()
