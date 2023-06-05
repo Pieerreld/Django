@@ -34,7 +34,13 @@
           <p class="card-text"> Date de la dernière maintenance : {{machine.maintenanceDate}}</p>
           <p class="card-text"> Propriétaire de la machine : {{machine.personnel}}</p>
           <p class="card-text"> Type de machine : {{machine.mach}}</p>
-          <p class="card-text"> Etat de la machine : {{machine.etat}}</p>
+          <p class="card-text"> Etat de la machine : {{machine.etat}}
+            {% if machine.etat == 'en ligne' %} 
+              <img width="20px" height="20px" src="{% static 'images/oui.png' %}">
+            {% else %}
+              <img width="20px" height="20px" src="{% static 'images/supprimer.png' %}">
+            {% endif %}
+          </p>
         </div>
         <a class="btn btn-primary" href="{% url 'supprimer_machine' machine.id %}" role="button">Supprimer</a>
     </div>
