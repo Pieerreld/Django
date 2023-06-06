@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
 </head>
 <body>
 
@@ -41,8 +42,10 @@
               <img width="20px" height="20px" src="{% static 'images/supprimer.png' %}">
             {% endif %}
           </p>
+          <p class="card-text">Adresse IP de la machine : {{machine.ip}}</p>
         </div>
         <a class="btn btn-primary" href="{% url 'supprimer_machine' machine.id %}" role="button">Supprimer</a>
+        <a class="btn btn-primary" href="{% url 'edit_machine' machine.id %}" role="button">Modifier</a>
     </div>
 
     

@@ -35,4 +35,10 @@ urlpatterns = [
           name='profile'),
      path('forbidden/', views.profile, name='forbidden'),
      path('logout/', views.logout, name='logout'),
+     path('edit_machine/<pk>',
+          views.edit_machine,
+          name='edit_machine'),
+     path('edit_personnel/<pk>',
+          views.edit_personnel,
+          name='edit_personnel'),
 ]

@@ -9,6 +9,9 @@ from django.shortcuts import get_object_or_404
 from .forms import AddMachineForm
 from .forms import AddPersonnelForm
 from django.contrib.auth.decorators import user_passes_test
+from .forms import MachineForm
+from .forms import PersonnelForm
+
 
 
 def index(request) :
@@ -97,7 +100,7 @@ def add_machine_personnel(request):
         if 'machine_submit' in request.POST:
             machine_form = AddMachineForm(request.POST)
             if machine_form.is_valid():
-                new_machine = Machine(nom=machine_form.cleaned_data['nom'], mach=machine_form.cleaned_data['mach'], etat=machine_form.cleaned_data['etat'])
+                new_machine = Machine(nom=machine_form.cleaned_data['nom'], mach=machine_form.cleaned_data['mach'], etat=machine_form.cleaned_data['etat'], ip=machine_form.cleaned_data['ip'],)
                 new_machine.save()
                 return redirect('liste_machine')
 
@@ -120,3 +123,29 @@ def chatbot(request) :
     machines = Machine.objects.all()
     context = {'machines': machines}
     return render(request, 'templates/chatbot.html')
+
+@user_passes_test(specific_user_check)
+def edit_machine(request, pk):
+    machine = get_object_or_404(Machine, id=pk)
+    if request.method == 'POST':
+        form = MachineForm(request.POST, instance=machine)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_machine')
+    else:
+        form = MachineForm(instance=machine)
+
+    return render(request, 'edit_machine.html', {'form': form})
+
+@user_passes_test(specific_user_check)
+def edit_personnel(request, pk):
+    personnel = get_object_or_404(Personnel, id=pk)
+    if request.method == 'POST':
+        form = PersonnelForm(request.POST, instance=personnel)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_personnel')
+    else:
+        form = PersonnelForm(instance=personnel)
+
+    return render(request, 'edit_personnel.html', {'form': form})

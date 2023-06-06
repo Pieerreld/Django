@@ -51,3 +51,5 @@ class Machine(models.Model):
     mach = models.CharField(max_length=32, choices=TYPE, default='PC')
     personnel = models.ForeignKey(Personnel, on_delete=models.SET_DEFAULT, default=1)
     etat = models.CharField(max_length=16, choices=ETAT, default='en ligne')
+    ip = models.GenericIPAddressField(default='0.0.0.0')
+
