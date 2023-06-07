@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from project.models import Machine 
 from project.models import Personnel
+from project.models import Infrastructure
 
 class AddMachineForm(forms.Form):
     nom = forms.CharField(required=True, label='Nom de la machine')
@@ -35,6 +36,7 @@ class AddPersonnelForm(forms.Form):
     prenom = forms.CharField(required=True, label='Prénom du personnel')
     poste = forms.ChoiceField(choices=Personnel.POSTE)
     etat = forms.ChoiceField(choices=Personnel.ETAT)
+    lieu = forms.ModelChoiceField(queryset=Infrastructure.objects.all(), label='Infrastructure', to_field_name='id')
 
     def clean_nom(self):
         data = self.cleaned_data['nom']
@@ -51,6 +53,10 @@ class AddPersonnelForm(forms.Form):
     def clean_etat(self):
         data = self.cleaned_data['etat']
         return data
+    
+    def clean_infrastructure(self):
+       data = self.cleaned_data['infrastructure']
+       return data
     
 class MachineForm(forms.ModelForm):
     class Meta:

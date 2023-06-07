@@ -20,6 +20,7 @@
         <div class="card-body">
           <h5 class="card-title"><strong>{{personnel.nom}} {{personnel.prenom}}</strong></h5>
           <p class="card-text"> Poste occupé : {{personnel.poste}}</p>
+          <p class="card-text"> Lieu de travail : {{personnel.lieu}}</p>
           <p class="card-text"> Etat de l'utilisateur : {{personnel.etat}}
             {% if personnel.etat == 'connecte' %} 
               <img width="20px" height="20px" src="{% static 'images/oui.png' %}">

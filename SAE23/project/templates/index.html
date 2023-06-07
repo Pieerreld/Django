@@ -32,6 +32,12 @@
       <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-light">
         <img class="deco" src="{% static 'images/deconnexion.png' %}">
       </button>
+
+        <form class="d-flex" action="{% url 'recherche' %}" method="GET">
+          <input class="form-control me-2" type="text" placeholder="Rechercher..." aria-label="Search" name="q">
+          <button class="btn btn-outline-primary" type="submit">Rechercher</button>
+        </form>
+
       <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
       </div>
 

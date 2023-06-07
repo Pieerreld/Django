@@ -5,12 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from project.models import Personnel
 from project.models import Machine
+from project.models import Infrastructure
 from django.shortcuts import get_object_or_404
 from .forms import AddMachineForm
 from .forms import AddPersonnelForm
 from django.contrib.auth.decorators import user_passes_test
 from .forms import MachineForm
 from .forms import PersonnelForm
+from django.db.models import Q
 
 
 
@@ -149,3 +151,44 @@ def edit_personnel(request, pk):
         form = PersonnelForm(instance=personnel)
 
     return render(request, 'edit_personnel.html', {'form': form})
+
+def recherche(request):
+    query = request.GET.get('q')
+    personnels = Personnel.objects.filter(
+        Q(nom__icontains=query) |
+        Q(prenom__icontains=query) | 
+        Q(poste__icontains=query) |
+        Q(etat__icontains=query) |
+        Q(lieu__lieu__icontains=query) 
+    )
+    machines = Machine.objects.filter(
+        Q(nom__icontains=query) |
+        Q(mach__icontains=query) |
+        Q(personnel__nom__icontains=query) |
+        Q(etat__icontains=query) |
+        Q(ip__icontains=query) 
+    )
+    infrastructures = Infrastructure.objects.filter(
+        Q(nom__icontains=query) |
+        Q(lieu__icontains=query) |
+        Q(reseau__icontains=query) 
+    )
+
+    fields_personnel = [
+    {'name': field.name, 'verbose_name': field.verbose_name, 'value': getattr(Personnel, field.name)}
+    for field in Personnel._meta.get_fields()
+    if not field.is_relation
+]
+    fields_machine = [field for field in Machine._meta.get_fields() if field.concrete]
+    fields_infra = [field for field in Infrastructure._meta.get_fields() if field.concrete]
+    
+    context = {
+        'personnels': personnels,
+        'machines': machines,
+        'infrastructures' : infrastructures,
+        'fields_personnel': fields_personnel,
+        'fields_machine': fields_machine,
+        'fields_infra': fields_infra,
+        'query': query
+    }
+    return render(request, 'recherche.html', context)

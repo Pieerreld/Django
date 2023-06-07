@@ -41,4 +41,5 @@ urlpatterns = [
      path('edit_personnel/<pk>',
           views.edit_personnel,
           name='edit_personnel'),
+     path('recherche/', views.recherche, name='recherche'),
 ]

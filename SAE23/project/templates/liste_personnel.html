@@ -13,6 +13,12 @@
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
+        <div class="container-fluid">
+          <form class="d-flex" action="{% url 'recherche' %}" method="GET">
+            <input class="form-control me-2" type="text" placeholder="Rechercher..." aria-label="Search" name="q">
+            <button class="btn btn-outline-primary" type="submit">Rechercher</button>
+          </form>
+        </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav nav-underline flex-grow-1 pe-3">
             <li class="nav-item">

@@ -4,7 +4,14 @@ from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+class Infrastructure(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    nom = models.CharField(max_length=30)
+    lieu = models.CharField(max_length=30)
+    reseau = models.GenericIPAddressField(default='0.0.0.0')
 
+    def __str__(self):
+        return f"{self.nom} {self.lieu}"
 
 class Personnel(models.Model):
 
@@ -25,6 +32,7 @@ class Personnel(models.Model):
     prenom = models.CharField(max_length=15)
     poste = models.CharField(max_length=32, choices=POSTE, default='Employee')
     etat = models.CharField(max_length= 16, choices=ETAT, default='connecte')
+    lieu = models.ForeignKey(Infrastructure, on_delete=models.SET_DEFAULT, default=1)
 
     def __str__(self):
         return f"{self.nom} {self.prenom}"
@@ -52,4 +60,3 @@ class Machine(models.Model):
     personnel = models.ForeignKey(Personnel, on_delete=models.SET_DEFAULT, default=1)
     etat = models.CharField(max_length=16, choices=ETAT, default='en ligne')
     ip = models.GenericIPAddressField(default='0.0.0.0')
-

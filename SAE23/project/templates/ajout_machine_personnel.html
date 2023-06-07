@@ -114,6 +114,15 @@
               {% endfor %}
           </select>
           </div>
+
+          <div>
+            <label for="{{ personnel_form.lieu.id_for_label }}">Infrastructure:</label>
+            <select name="{{ personnel_form.lieu.name }}" id="{{ personnel_form.lieu.id_for_label }}">
+                {% for choice in personnel_form.lieu.field.choices %}
+                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+            </div>
         
       </div>
       <div class="modal-footer">
