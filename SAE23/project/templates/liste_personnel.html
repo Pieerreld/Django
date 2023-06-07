@@ -1,37 +1,38 @@
-{% extends "index.html" %}
-{% block sidebar %}
+{% extends "index.html" %}  <!-- On étend le modèle "index.html" -->
+
+{% block sidebar %}  <!-- On définit le bloc sidebar -->
   <nav class="navbar nvbar fixed-top">
     <div class="container-fluid">
         {% load static %}
-      <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
-      <h1 class="navbar-brand fs-2 fw-semibold text-center ">IT MANAGEMENT</h1>
+      <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">  <!-- Logo de l'entreprise -->
+      <h1 class="navbar-brand fs-2 fw-semibold text-center ">IT MANAGEMENT</h1>  <!-- Titre de la barre de navigation -->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MENU</h5>  <!-- Titre du menu déroulant -->
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="container-fluid">
           <form class="d-flex" action="{% url 'recherche' %}" method="GET">
-            <input class="form-control me-2" type="text" placeholder="Rechercher..." aria-label="Search" name="q">
+            <input class="form-control me-2" type="text" placeholder="Rechercher..." aria-label="Search" name="q">  <!-- Formulaire de recherche -->
             <button class="btn btn-outline-primary" type="submit">Rechercher</button>
           </form>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav nav-underline flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{% url 'index' %}">Accueil</a>
+              <a class="nav-link" aria-current="page" href="{% url 'index' %}">Accueil</a>  <!-- Lien vers la page d'accueil -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'liste_machine' %}">Machines</a>
+              <a class="nav-link" href="{% url 'liste_machine' %}">Machines</a>  <!-- Lien vers la liste des machines -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'liste_personnel' %}">Personnels</a>
+              <a class="nav-link" href="{% url 'liste_personnel' %}">Personnels</a>  <!-- Lien vers la liste du personnel -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'ajout_machine_personnel' %}">Ajouter machine ou personnel</a>
+              <a class="nav-link" href="{% url 'ajout_machine_personnel' %}">Ajouter machine ou personnel</a>  <!-- Lien vers la page d'ajout de machine ou personnel -->
             </li>
           </ul>
           </form>
@@ -39,28 +40,28 @@
       </div>
     </div>
   </nav>
-  <div class="longueur"></div>
-  {% endblock %}
+  <div class="longueur"></div>  <!-- Élément de séparation -->
+{% endblock %}
 
-  {% block content %} 
-  {% if personnels %}
-      <div class="container px-4 py-5" id="hanging-icons">
-          <h2 class="pb-2 border-bottom">Liste du personnel</h2>
-          <div class="row g-4 py-5 row-cols-1 row-cols-lg-5">
-              {% for personnel in personnels %}
-                  <div class="col d-flex align-items-start mach_block">
-                      <div>
-                      <h3 class="fs-2">{{ personnel.nom}} {{personnel.prenom}}</h3>
-                      <p></p>
-                      <a href="{% url 'personnel_view' personnel.id %}" class="btn btn-primary">
-                          {{ personnel.id}}
-                      </a>
-                      </div>
-                  </div>
-              {% endfor %}
-          </div>
-      </div>
-      {% else %}
-      <p>Il n'y a pas de personnels.</p>
-  {% endif %}
-{% endblock %} 
+{% block content %}  <!-- On définit le bloc de contenu -->
+{% if personnels %}  <!-- On vérifie s'il y a des personnels -->
+    <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">Liste du personnel</h2>  <!-- Titre de la liste du personnel -->
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-5">
+            {% for personnel in personnels %}  <!-- Pour chaque personnel dans la liste des personnels -->
+                <div class="col d-flex align-items-start mach_block">
+                    <div>
+                    <h3 class="fs-2">{{ personnel.nom}} {{personnel.prenom}}</h3>  <!-- Affichage du nom et prénom du personnel -->
+                    <p></p>  <!-- Paragraphe vide -->
+                    <a href="{% url 'personnel_view' personnel.id %}" class="btn btn-primary">
+                        {{ personnel.id}}  <!-- Lien vers la vue détaillée du personnel -->
+                    </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <p>Il n'y a pas de personnels.</p>  <!-- Message affiché s'il n'y a pas de personnels -->
+{% endif %}
+{% endblock %}

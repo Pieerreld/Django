@@ -4,50 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Django</title>
+    <title>IT Management</title>  <!-- Titre de la page -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">  <!-- Import du fichier CSS Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  <!-- Import du fichier CSS personnalisé -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  <!-- Import du fichier JavaScript Bootstrap -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />  <!-- Icône de favicon -->
 </head>
 <body>
 
-    {% block menu %} 
+    {% block menu %}  <!-- Début du bloc de menu -->
     <div class="container navbar index_navbar border-bottom">
-        <h2 class="pb-2">IT Management</h2>
-        <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
+        <h2 class="pb-2">IT Management</h2>  <!-- Titre du menu -->
+        <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">  <!-- Logo du menu -->
     </div>
-    <nav class="machine_view" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <nav class="machine_view" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">  
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>
-          <li class="breadcrumb-item"><a href="{% url 'liste_machine' %}">Liste Machine</a></li>
-          <li class="breadcrumb-item" aria-current="page">{{machine.nom}}</li>
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>  <!-- Lien vers la page d'accueil -->
+          <li class="breadcrumb-item"><a href="{% url 'liste_machine' %}">Liste Machine</a></li>  <!-- Lien vers la liste des machines -->
+          <li class="breadcrumb-item" aria-current="page">{{machine.nom}}</li>  <!-- Nom de la machine courante -->
         </ol>
       </nav>
-    {% endblock %} 
+    {% endblock %}  <!-- Fin du bloc de menu -->
 
-    {%block content %}
-    <div class="card text-bg-primary mb-3 container" style="max-width: 25rem;">
-        <div class="card-header">{{machine.id}}</div>
+    {%block content %}  <!-- Début du bloc de contenu -->
+    <div class="card text-bg-primary mb-3 container" style="max-width: 25rem;">  <!-- Carte avec des classes de style personnalisé -->
+        <div class="card-header">{{machine.id}}</div>  <!-- En-tête de la carte avec l'ID de la machine -->
         <div class="card-body">
-          <h5 class="card-title"><strong>{{machine.nom}}</strong></h5>
-          <p class="card-text"> Date de la dernière maintenance : {{machine.maintenanceDate}}</p>
-          <p class="card-text"> Propriétaire de la machine : {{machine.personnel}}</p>
-          <p class="card-text"> Type de machine : {{machine.mach}}</p>
+          <h5 class="card-title"><strong>{{machine.nom}}</strong></h5>  <!-- Titre de la carte avec le nom de la machine -->
+          <p class="card-text"> Date de la dernière maintenance : {{machine.maintenanceDate}}</p>  <!-- Texte de la carte avec la date de dernière maintenance -->
+          <p class="card-text"> Propriétaire de la machine : {{machine.personnel}}</p>  <!-- Texte de la carte avec le propriétaire de la machine -->
+          <p class="card-text"> Type de machine : {{machine.mach}}</p>  <!-- Texte de la carte avec le type de machine -->
           <p class="card-text"> Etat de la machine : {{machine.etat}}
-            {% if machine.etat == 'en ligne' %} 
-              <img width="20px" height="20px" src="{% static 'images/oui.png' %}">
+            {% if machine.etat == 'en ligne' %}  <!-- Condition pour afficher une icône en fonction de l'état de la machine -->
+              <img width="20px" height="20px" src="{% static 'images/oui.png' %}">  <!-- Icône affichée lorsque la machine est en ligne -->
             {% else %}
-              <img width="20px" height="20px" src="{% static 'images/supprimer.png' %}">
+              <img width="20px" height="20px" src="{% static 'images/supprimer.png' %}">  <!-- Icône affichée lorsque la machine n'est pas en ligne -->
             {% endif %}
           </p>
-          <p class="card-text">Adresse IP de la machine : {{machine.ip}}</p>
+          <p class="card-text">Adresse IP de la machine : {{machine.ip}}</p>  <!-- Texte de la carte avec l'adresse IP de la machine -->
         </div>
-        <a class="btn btn-primary" href="{% url 'supprimer_machine' machine.id %}" role="button">Supprimer</a>
-        <a class="btn btn-primary" href="{% url 'edit_machine' machine.id %}" role="button">Modifier</a>
+        <a class="btn btn-primary" href="{% url 'supprimer_machine' machine.id %}" role="button">Supprimer</a>  <!-- Bouton de suppression avec un lien vers la page de suppression de la machine -->
+        <a class="btn btn-primary" href="{% url 'edit_machine' machine.id %}" role="button">Modifier</a>  <!-- Bouton de modification avec un lien vers la page de modification de la machine -->
     </div>
 
-    
-
-    {% endblock %} 
+    {% endblock %}  <!-- Fin du bloc de contenu -->
+</body>
+</html>

@@ -1,13 +1,15 @@
 {% extends "supprimer_machine.html" %}
 
 {% block content %}
+<!-- Card container -->
 <div class="card container" style="width: 28rem;">
     <div class="card-body">
+        <!-- Form -->
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button class="btn btn-primary" type="submit">Enregistrer</button>
-          </form>
+        </form>
     </div>
-  </div>
+</div>
 {% endblock %}

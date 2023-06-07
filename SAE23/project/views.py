@@ -14,86 +14,87 @@ from .forms import MachineForm
 from .forms import PersonnelForm
 from django.db.models import Q
 
+# Vue pour la page d'accueil
+def index(request):
+    return render(request, 'index.html')
 
-
-def index(request) :
-    
-    return render(request, 'templates/index.html')
-
+# Fonction pour vérifier si l'utilisateur est 'admin'
 def specific_user_check(user):
     return user.username == 'admin'
 
-def login(request) :
+# Vue pour la page de connexion
+def login(request):
     if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                auth_login(request, user)
-                next_page = request.POST.get('next')
-                if next_page:
-                    return redirect(next_page)
-                else:
-                    return redirect('homepage')
+        # Récupérer les informations d'identification soumises par l'utilisateur
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # Authentifier l'utilisateur
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            next_page = request.POST.get('next')
+            if next_page:
+                return redirect(next_page)
             else:
-                error_message = 'Identifiant ou mot de passe incorrect.'
-                return render(request, 'login.html', {'error_message': error_message})
+                return redirect('homepage')
+        else:
+            error_message = 'Identifiant ou mot de passe incorrect.'
+            return render(request, 'login.html', {'error_message': error_message})
     else:
         return render(request, 'login.html')
 
-@login_required
-def profile(request):
-    user = request.user
-    return render(request, 'templates/profile.html', {'user': user})
-
+# Vue pour la déconnexion de l'utilisateur
 def logout(request):
-  auth_logout(request)
-  return redirect('index')
+    auth_logout(request)
+    return redirect('index')
 
-def liste_personnel(request) :
+# Vue pour afficher la liste du personnel
+def liste_personnel(request):
     personnels = Personnel.objects.all()
-
     context = {
-        'personnels' : personnels,
+        'personnels': personnels,
     }
-    return render(request, 'templates/liste_personnel.html', context)
+    return render(request, 'liste_personnel.html', context)
 
-def liste_machine(request) :
+# Vue pour afficher la liste des machines
+def liste_machine(request):
     machines = Machine.objects.all()
-
     context = {
-        'machines' : machines,
+        'machines': machines,
     }
-    return render(request, 'templates/liste_machine.html', context)
+    return render(request, 'liste_machine.html', context)
 
+# Vue pour afficher les détails d'une machine spécifique
 def machine_view(request, pk):
     machine = get_object_or_404(Machine, id=pk)
-    context={'machine': machine}
-    return render (request,
-            'templates/machine_view.html', context)
+    context = {'machine': machine}
+    return render(request, 'machine_view.html', context)
 
+# Vue pour afficher les détails d'un membre du personnel spécifique
 def personnel_view(request, pk):
     personnel = get_object_or_404(Personnel, id=pk)
-    context={'personnel': personnel}
-    return render (request,
-            'templates/personnel_view.html', context)
+    context = {'personnel': personnel}
+    return render(request, 'personnel_view.html', context)
 
+# Vue pour supprimer une machine spécifique (accessible uniquement à l'admin)
 @user_passes_test(specific_user_check)
 def supprimer_machine(request, pk):
     machine = get_object_or_404(Machine, id=pk)
-    if request.method =='POST':
+    if request.method == 'POST':
         machine.delete()
         return redirect('liste_machine')
-    return render(request, 'templates/supprimer_machine.html', {'machine': machine})
+    return render(request, 'supprimer_machine.html', {'machine': machine})
 
+# Vue pour supprimer un membre du personnel spécifique (accessible uniquement à l'admin)
 @user_passes_test(specific_user_check)
 def supprimer_personnel(request, pk):
     personnel = get_object_or_404(Personnel, id=pk)
-    if request.method =='POST':
+    if request.method == 'POST':
         personnel.delete()
         return redirect('liste_personnel')
-    return render(request, 'templates/supprimer_personnel.html', {'personnel': personnel})
+    return render(request, 'supprimer_personnel.html', {'personnel': personnel})
 
+# Vue pour ajouter une machine ou un membre du personnel (accessible uniquement à l'admin)
 @user_passes_test(specific_user_check)
 def add_machine_personnel(request):
     machine_form = AddMachineForm()
@@ -116,16 +117,18 @@ def add_machine_personnel(request):
         machine_form = AddMachineForm()
         personnel_form = AddPersonnelForm()
 
-    return render(request, 'templates/ajout_machine_personnel.html', {
+    return render(request, 'ajout_machine_personnel.html', {
         'machine_form': machine_form,
         'personnel_form': personnel_form,
     })
 
-def chatbot(request) :
+# Vue pour le chatbot
+def chatbot(request):
     machines = Machine.objects.all()
     context = {'machines': machines}
-    return render(request, 'templates/chatbot.html')
+    return render(request, 'chatbot.html', context)
 
+# Vue pour éditer une machine spécifique (accessible uniquement à l'admin)
 @user_passes_test(specific_user_check)
 def edit_machine(request, pk):
     machine = get_object_or_404(Machine, id=pk)
@@ -139,6 +142,7 @@ def edit_machine(request, pk):
 
     return render(request, 'edit_machine.html', {'form': form})
 
+# Vue pour éditer un membre du personnel spécifique (accessible uniquement à l'admin)
 @user_passes_test(specific_user_check)
 def edit_personnel(request, pk):
     personnel = get_object_or_404(Personnel, id=pk)
@@ -152,6 +156,7 @@ def edit_personnel(request, pk):
 
     return render(request, 'edit_personnel.html', {'form': form})
 
+# Vue pour effectuer une recherche
 def recherche(request):
     query = request.GET.get('q')
     personnels = Personnel.objects.filter(
@@ -175,17 +180,17 @@ def recherche(request):
     )
 
     fields_personnel = [
-    {'name': field.name, 'verbose_name': field.verbose_name, 'value': getattr(Personnel, field.name)}
-    for field in Personnel._meta.get_fields()
-    if not field.is_relation
-]
+        {'name': field.name, 'verbose_name': field.verbose_name, 'value': getattr(Personnel, field.name)}
+        for field in Personnel._meta.get_fields()
+        if not field.is_relation
+    ]
     fields_machine = [field for field in Machine._meta.get_fields() if field.concrete]
     fields_infra = [field for field in Infrastructure._meta.get_fields() if field.concrete]
-    
+
     context = {
         'personnels': personnels,
         'machines': machines,
-        'infrastructures' : infrastructures,
+        'infrastructures': infrastructures,
         'fields_personnel': fields_personnel,
         'fields_machine': fields_machine,
         'fields_infra': fields_infra,

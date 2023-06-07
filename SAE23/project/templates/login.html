@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Django</title>
+    <title>IT Management</title>  <!-- Titre de la page -->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">  <!-- Import du fichier CSS Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  <!-- Import du fichier CSS personnalisé -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  <!-- Import du fichier JavaScript Bootstrap -->
 </head>
-<body class="log">
-  {% block content %}
-<section class=" gradient-custom">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card bg-dark text-white" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
-            <form method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-              <div class="mb-md-5 mt-md-4 pb-5">
-                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                <p class="text-white-50 mb-5">Entrez votre identifiant et mot de passe !</p>
+<body class="log">  <!-- Classe CSS pour le corps de la page -->
+  {% block content %}  <!-- On définit le bloc de contenu -->
+<section class=" gradient-custom">  <!-- Section avec une classe de style personnalisé -->
+    <div class="container py-5 h-100">  <!-- Conteneur avec une classe de style personnalisé -->
+      <div class="row d-flex justify-content-center align-items-center h-100">  <!-- Ligne avec des classes de style personnalisé -->
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">  <!-- Colonne avec des classes de style personnalisé -->
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">  <!-- Carte avec des classes de style personnalisé et une propriété de style en ligne -->
+            <div class="card-body p-5 text-center">  <!-- Corps de la carte avec des classes de style personnalisé -->
+            <form method="post" action="{% url 'login' %}">  <!-- Formulaire avec une méthode POST et une action basée sur une URL nommée -->
+                {% csrf_token %}  <!-- Jeton CSRF pour la sécurité -->
+              <div class="mb-md-5 mt-md-4 pb-5">  <!-- Div avec des classes de style personnalisé -->
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>  <!-- Titre avec des classes de style personnalisé -->
+                <p class="text-white-50 mb-5">Entrez votre identifiant et mot de passe !</p>  <!-- Paragraphe avec une classe de style personnalisé -->
   
-                <div class="form-outline form-white mb-4">
-                  <input type="text" id="typeIdX" class="form-control form-control-lg" name="username" required/>
-                  <label class="form-label" for="typeIdX">Identifiant</label>
+                <div class="form-outline form-white mb-4">  <!-- Div de formulaire avec des classes de style personnalisé -->
+                  <input type="text" id="typeIdX" class="form-control form-control-lg" name="username" required/>  <!-- Champ de saisie avec des classes de style personnalisé -->
+                  <label class="form-label" for="typeIdX">Identifiant</label>  <!-- Label associé au champ de saisie -->
                 </div>
   
-                <div class="form-outline form-white mb-4">
-                  <input type="password" id="typePasswordX" class="form-control form-control-lg" name="password" required/>
-                  <label class="form-label" for="typePasswordX">Mot de passe</label>
+                <div class="form-outline form-white mb-4">  <!-- Div de formulaire avec des classes de style personnalisé -->
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" name="password" required/>  <!-- Champ de saisie de mot de passe avec des classes de style personnalisé -->
+                  <label class="form-label" for="typePasswordX">Mot de passe</label>  <!-- Label associé au champ de saisie de mot de passe -->
                 </div>
-                <input type="hidden" name="next" value="{{ request.GET.next }}">
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                <input type="hidden" name="next" value="{{ request.GET.next }}">  <!-- Champ de saisie caché avec une valeur basée sur la requête GET -->
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>  <!-- Bouton de soumission avec des classes de style personnalisé -->
   
               </div>
             </form>
@@ -44,13 +44,14 @@
       </div>
     </div>
   </section>
-  {% endblock %}
-  <div class="icon-container">
-    <a href="{% url 'index' %}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
-            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+  {% endblock %}  <!-- Fin du bloc de contenu -->
+  <div class="icon-container">  <!-- Div avec une classe de style personnalisé -->
+    <a href="{% url 'index' %}">  <!-- Lien basé sur une URL nommée -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">  <!-- Icône SVG avec des classes de style personnalisé -->
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>  <!-- Chemin de l'icône -->
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>  <!-- Chemin de l'icône -->
           </svg>
     </a>
   </div>
 </body>
+</html>

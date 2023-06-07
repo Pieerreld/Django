@@ -1,26 +1,24 @@
-{% extends "liste_personnel.html" %}
+{% extends "liste_personnel.html" %}  <!-- On étend le modèle "liste_personnel.html" -->
 
-
-
-{% block content %} 
-    {% if machines %}
+{% block content %}  <!-- On définit le bloc de contenu -->
+    {% if machines %}  <!-- On vérifie s'il y a des machines -->
         <div class="container px-4 py-5" id="hanging-icons">
             <h2 class="pb-2 border-bottom">Liste des machines</h2>
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-5">
-                {% for machine in machines %}
+                {% for machine in machines %}  <!-- Pour chaque machine dans la liste des machines -->
                     <div class="col d-flex align-items-start mach_block">
                         <div>
-                        <h3 class="fs-2">{{ machine.nom}}</h3>
-                        <p>{{machine.mach}}</p>
-                        <a href="{% url 'machine_view' machine.id %}" class="btn btn-primary">
-                            {{ machine.id}}
-                        </a>
+                            <h3 class="fs-2">{{ machine.nom }}</h3>  <!-- Affichage du nom de la machine -->
+                            <p>{{ machine.mach }}</p>  <!-- Affichage des informations de la machine -->
+                            <a href="{% url 'machine_view' machine.id %}" class="btn btn-primary">
+                                {{ machine.id }}  <!-- Lien vers la vue détaillée de la machine -->
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        {% else %}
-        <p>Il n'y a pas de machines.</p>
+    {% else %}
+        <p>Il n'y a pas de machines.</p>  <!-- Message affiché s'il n'y a pas de machines -->
     {% endif %}
-{% endblock %} 
+{% endblock %}

@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Django</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />
+    <title>IT Management</title>
+    {% load static %}  <!-- Charge les fichiers statiques -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">  <!-- Lien vers le fichier CSS de Bootstrap -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  <!-- Lien vers le fichier CSS personnalisé -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  <!-- Lien vers le fichier JavaScript de Bootstrap -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/logo.png' %}" />  <!-- Lien vers l'icône du site -->
 </head>
 <body>
-    <h1 style="text-align: center;">Résultats de la recherche pour "{{ query }}" :</h1>
+    <h1 style="text-align: center;">Résultats de la recherche pour "{{ query }}" :</h1>  <!-- Titre de la page avec la requête de recherche -->
 
     <div class="accordion" id="accordionExample">
         {% for personnel in personnels %}
             {% if empty %}
-
+            <!-- Si la liste de personnels est vide -->
             {% else %}
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -25,13 +25,13 @@
                         {{ personnel.nom }} {{ personnel.prenom }}
                     </button>
                     </h2>
-                    <div id="div_{{ forloop.counter }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="div_{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul>
-                                <p> <strong>Id:</strong>{{ personnel.id }}</p>
-                                <p> <strong>Poste:</strong>{{ personnel.poste }}</p>
-                                <p> <strong>Etat:</strong>{{ personnel.etat }}</p>
-                                <p> <strong>Lieu:</strong>{{ personnel.lieu }}</p>
+                                <p> <strong>Id:</strong>{{ personnel.id }}</p>  <!-- Affiche l'ID du personnel -->
+                                <p> <strong>Poste:</strong>{{ personnel.poste }}</p>  <!-- Affiche le poste occupé par le personnel -->
+                                <p> <strong>Etat:</strong>{{ personnel.etat }}</p>  <!-- Affiche l'état de l'utilisateur -->
+                                <p> <strong>Lieu:</strong>{{ personnel.lieu }}</p>  <!-- Affiche le lieu de travail du personnel -->
                             </ul>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
     <div class="accordion" id="accordionExample">
         {% for machine in machines %}
             {% if empty %}
-
+            <!-- Si la liste de machines est vide -->
             {% else %}
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -51,14 +51,14 @@
                         {{ machine.nom }}
                     </button>
                     </h2>
-                    <div id="div_{{ forloop.counter }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="div_{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul>
-                                <p> <strong>Id:</strong>{{ machine.id }}</p>
-                                <p> <strong>Type:</strong>{{ machine.mach }}</p>
-                                <p> <strong>Etat:</strong>{{ machine.etat }}</p>
-                                <p> <strong>Proprietaire:</strong>{{ machine.personnel }}</p>
-                                <p> <strong>Ip:</strong>{{ machine.ip }}</p>
+                                <p> <strong>Id:</strong>{{ machine.id }}</p>  <!-- Affiche l'ID de la machine -->
+                                <p> <strong>Type:</strong>{{ machine.mach }}</p>  <!-- Affiche le type de la machine -->
+                                <p> <strong>Etat:</strong>{{ machine.etat }}</p>  <!-- Affiche l'état de la machine -->
+                                <p> <strong>Proprietaire:</strong>{{ machine.personnel }}</p>  <!-- Affiche le propriétaire de la machine -->
+                                <p> <strong>Ip:</strong>{{ machine.ip }}</p>  <!-- Affiche l'adresse IP de la machine -->
                             </ul>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
     <div class="accordion" id="accordionExample">
         {% for infra in infrastructures %}
             {% if empty %}
-
+            <!-- Si la liste d'infrastructures est vide -->
             {% else %}
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -77,12 +77,12 @@
                         {{ infra.nom }}
                     </button>
                     </h2>
-                    <div id="div_{{ forloop.counter }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="div_{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul>
-                                <p> <strong>Id:</strong>{{ infra.id }}</p>
-                                <p> <strong>Lieu:</strong>{{ infra.lieu }}</p>
-                                <p> <strong>Reseau:</strong>{{ infra.reseau }}</p>
+                                <p> <strong>Id:</strong>{{ infra.id }}</p>  <!-- Affiche l'ID de l'infrastructure -->
+                                <p> <strong>Lieu:</strong>{{ infra.lieu }}</p>  <!-- Affiche le lieu de l'infrastructure -->
+                                <p> <strong>Reseau:</strong>{{ infra.reseau }}</p>  <!-- Affiche le réseau de l'infrastructure -->
                             </ul>
                         </div>
                     </div>
@@ -95,8 +95,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                 <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
                 <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
-              </svg>
+            </svg>
         </a>
-      </div>
+    </div>
 </body>
 </html>

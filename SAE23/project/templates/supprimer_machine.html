@@ -1,6 +1,7 @@
-{% extends "machine_view.html" %}
+{% extends "machine_view.html" %}  <!-- Étend le modèle de "machine_view.html" -->
 
 {% block content %}
+<!-- Bloc de contenu spécifique à cette page -->
 <div class="alert alert-primary d-flex align-items-center alert-dismissible fade show" role="alert">
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sign-stop-fill" viewBox="0 0 16 16">
@@ -12,7 +13,7 @@
   </div>
 
   <form method="POST">
-    {% csrf_token %} 
-    <button class="btn btn-primary" type="submit">Oui, supprimer</button>
+    {% csrf_token %}  <!-- Ajoute le jeton CSRF pour la protection contre les attaques CSRF -->
+    <button class="btn btn-primary" type="submit">Oui, supprimer</button>  <!-- Bouton de soumission pour supprimer la machine -->
   </form>
 {% endblock %}

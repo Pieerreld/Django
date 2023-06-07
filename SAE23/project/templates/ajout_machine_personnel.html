@@ -1,5 +1,7 @@
-{% extends "machine_view.html" %} 
-{% load static %}
+{% extends "machine_view.html" %}  <!-- On étend le modèle "machine_view.html" -->
+
+{% load static %}  <!-- On charge les fichiers statiques -->
+
 {% block menu %} 
     <div class="container navbar index_navbar border-bottom">
         <h2 class="pb-2">IT Management</h2>
@@ -10,7 +12,7 @@
           <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>
           <li class="breadcrumb-item" aria-current="page">Gestion Machine</li>
         </ol>
-      </nav>
+    </nav>
 {% endblock %} 
 
 {%block content %}
@@ -30,48 +32,48 @@
       </div>
       <div class="modal-body">
         <form method="post">
-          {% csrf_token %} 
+          {% csrf_token %}  <!-- On ajoute le jeton CSRF pour la sécurité -->
           <div>
-          {{ machine_form.nom.label_tag }}
-          {{ machine_form.nom }}
+            {{ machine_form.nom.label_tag }}  <!-- Affichage de l'étiquette du champ "nom" du formulaire -->
+            {{ machine_form.nom }}  <!-- Affichage du champ "nom" du formulaire -->
           </div>
         
           <div>
-          <label for="{{ machine_form.mach.id_for_label }}">Type de la machine:</label>
-          <select name="{{ machine_form.mach.name }}" id="{{ machine_form.mach.id_for_label }}">
-            {% for choice in machine_form.mach.field.choices %}
-              <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-            {% endfor %}
-          </select>
+            <label for="{{ machine_form.mach.id_for_label }}">Type de la machine:</label>
+            <select name="{{ machine_form.mach.name }}" id="{{ machine_form.mach.id_for_label }}">
+              {% for choice in machine_form.mach.field.choices %}  <!-- Boucle pour afficher les choix du champ "mach" -->
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>  <!-- Affichage des options du champ "mach" -->
+              {% endfor %}
+            </select>
           </div>
           
           <div>
-          <label for="{{ machine_form.etat.id_for_label }}">Etat de la machine:</label>
-          <select name="{{ machine_form.etat.name }}" id="{{ machine_form.etat.id_for_label }}">
-              {% for choice in machine_form.etat.field.choices %}
-                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            <label for="{{ machine_form.etat.id_for_label }}">Etat de la machine:</label>
+            <select name="{{ machine_form.etat.name }}" id="{{ machine_form.etat.id_for_label }}">
+              {% for choice in machine_form.etat.field.choices %}  <!-- Boucle pour afficher les choix du champ "etat" -->
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>  <!-- Affichage des options du champ "etat" -->
               {% endfor %}
-          </select>
+            </select>
           </div>
 
           <div>
             <label for="{{ machine_form.personnel.id_for_label }}">Propriétaire de la machine:</label>
             <select name="{{ machine_form.personnel.name }}" id="{{ machine_form.personnel.id_for_label }}">
-                {% for choice in machine_form.personnel.field.choices %}
-                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                {% endfor %}
+              {% for choice in machine_form.personnel.field.choices %}  <!-- Boucle pour afficher les choix du champ "personnel" -->
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>  <!-- Affichage des options du champ "personnel" -->
+              {% endfor %}
             </select>
-            </div>
+          </div>
 
-            <div>
-              {{ machine_form.ip.label_tag }}
-              {{ machine_form.ip }}
-            </div>
+          <div>
+            {{ machine_form.ip.label_tag }}  <!-- Affichage de l'étiquette du champ "ip" du formulaire -->
+            {{ machine_form.ip }}  <!-- Affichage du champ "ip" du formulaire -->
+          </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary" name="machine_submit" value="Create Machine">
+        <input type="submit" class="btn btn-primary" name="machine_submit" value="Create Machine">  <!-- Bouton pour soumettre le formulaire -->
       </form>
       </div>
     </div>
@@ -87,53 +89,51 @@
       </div>
       <div class="modal-body">
         <form method="post">
-          {% csrf_token %} 
+          {% csrf_token %}  <!-- On ajoute le jeton CSRF pour la sécurité -->
           <div>
-          {{ personnel_form.nom.label_tag }}
-          {{ personnel_form.nom }}
+            {{ personnel_form.nom.label_tag }}  <!-- Affichage de l'étiquette du champ "nom" du formulaire -->
+            {{ personnel_form.nom }}  <!-- Affichage du champ "nom" du formulaire -->
           </div>
           <div>
-          {{ personnel_form.prenom.label_tag }}
-          {{ personnel_form.prenom }}
-          </div>
-          
-          <div>
-          <label for="{{ personnel_form.poste.id_for_label }}">Titre du poste:</label>
-          <select name="{{ personnel_form.poste.name }}" id="{{ personnel_form.poste.id_for_label }}">
-            {% for choice in personnel_form.poste.field.choices %}
-              <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-            {% endfor %}
-          </select>
+            {{ personnel_form.prenom.label_tag }}  <!-- Affichage de l'étiquette du champ "prenom" du formulaire -->
+            {{ personnel_form.prenom }}  <!-- Affichage du champ "prenom" du formulaire -->
           </div>
           
           <div>
-          <label for="{{ personnel_form.etat.id_for_label }}">Etat du personnel:</label>
-          <select name="{{ personnel_form.etat.name }}" id="{{ personnel_form.etat.id_for_label }}">
-              {% for choice in personnel_form.etat.field.choices %}
-                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            <label for="{{ personnel_form.poste.id_for_label }}">Titre du poste:</label>
+            <select name="{{ personnel_form.poste.name }}" id="{{ personnel_form.poste.id_for_label }}">
+              {% for choice in personnel_form.poste.field.choices %}  <!-- Boucle pour afficher les choix du champ "poste" -->
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>  <!-- Affichage des options du champ "poste" -->
               {% endfor %}
-          </select>
+            </select>
+          </div>
+          
+          <div>
+            <label for="{{ personnel_form.etat.id_for_label }}">Etat du personnel:</label>
+            <select name="{{ personnel_form.etat.name }}" id="{{ personnel_form.etat.id_for_label }}">
+              {% for choice in personnel_form.etat.field.choices %}  <!-- Boucle pour afficher les choix du champ "etat" -->
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>  <!-- Affichage des options du champ "etat" -->
+              {% endfor %}
+            </select>
           </div>
 
           <div>
             <label for="{{ personnel_form.lieu.id_for_label }}">Infrastructure:</label>
             <select name="{{ personnel_form.lieu.name }}" id="{{ personnel_form.lieu.id_for_label }}">
-                {% for choice in personnel_form.lieu.field.choices %}
-                  <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                {% endfor %}
+              {% for choice in personnel_form.lieu.field.choices %}  <!-- Boucle pour afficher les choix du champ "lieu" -->
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>  <!-- Affichage des options du champ "lieu" -->
+              {% endfor %}
             </select>
-            </div>
+          </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary" name="personnel_submit" value="Create Personnel">
+        <input type="submit" class="btn btn-primary" name="personnel_submit" value="Create Personnel">  <!-- Bouton pour soumettre le formulaire -->
       </form>
       </div>
     </div>
   </div>
 </div>
 
-
-
-{% endblock %} 
+{% endblock %}

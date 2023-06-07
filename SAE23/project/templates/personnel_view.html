@@ -1,35 +1,37 @@
-{% extends "machine_view.html" %}
-{% load static %}
-{% block menu %} 
+{% extends "machine_view.html" %}  <!-- Hérite du modèle "machine_view.html" -->
+
+{% load static %}  <!-- Charge les fichiers statiques -->
+
+{% block menu %}  <!-- Début du bloc de menu -->
     <div class="container navbar index_navbar border-bottom">
-        <h2 class="pb-2">IT Management</h2>
-        <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">
+        <h2 class="pb-2">IT Management</h2>  <!-- Titre du menu -->
+        <img src="{% static 'images/rtdev.png' %}" class="rtdev img-thumbnail" alt="...">  <!-- Logo du menu -->
     </div>
-    <nav class="machine_view" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+    <nav class="machine_view" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb"> 
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>
-          <li class="breadcrumb-item"><a href="{% url 'liste_machine' %}">Liste Personnel</a></li>
-          <li class="breadcrumb-item" aria-current="page">{{personnel.nom}} {{personnel.prenom}}</li>
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Accueil</a></li>  <!-- Lien vers la page d'accueil -->
+          <li class="breadcrumb-item"><a href="{% url 'liste_machine' %}">Liste Personnel</a></li>  <!-- Lien vers la liste des personnels -->
+          <li class="breadcrumb-item" aria-current="page">{{personnel.nom}} {{personnel.prenom}}</li>  <!-- Nom et prénom du personnel courant -->
         </ol>
       </nav>
-{% endblock %} 
+{% endblock %}  <!-- Fin du bloc de menu -->
 
-{%block content %}
-    <div class="card text-bg-primary mb-3 container" style="max-width: 25rem;">
-        <div class="card-header">{{personnel.id}}</div>
+{% block content %}  <!-- Début du bloc de contenu -->
+    <div class="card text-bg-primary mb-3 container" style="max-width: 25rem;">  <!-- Carte avec des classes de style personnalisé -->
+        <div class="card-header">{{personnel.id}}</div>  <!-- En-tête de la carte avec l'ID du personnel -->
         <div class="card-body">
-          <h5 class="card-title"><strong>{{personnel.nom}} {{personnel.prenom}}</strong></h5>
-          <p class="card-text"> Poste occupé : {{personnel.poste}}</p>
-          <p class="card-text"> Lieu de travail : {{personnel.lieu}}</p>
+          <h5 class="card-title"><strong>{{personnel.nom}} {{personnel.prenom}}</strong></h5>  <!-- Titre de la carte avec le nom et prénom du personnel -->
+          <p class="card-text"> Poste occupé : {{personnel.poste}}</p>  <!-- Texte de la carte avec le poste occupé par le personnel -->
+          <p class="card-text"> Lieu de travail : {{personnel.lieu}}</p>  <!-- Texte de la carte avec le lieu de travail du personnel -->
           <p class="card-text"> Etat de l'utilisateur : {{personnel.etat}}
-            {% if personnel.etat == 'connecte' %} 
-              <img width="20px" height="20px" src="{% static 'images/oui.png' %}">
+            {% if personnel.etat == 'connecte' %}  <!-- Condition pour afficher une icône en fonction de l'état de l'utilisateur -->
+              <img width="20px" height="20px" src="{% static 'images/oui.png' %}">  <!-- Icône affichée lorsque l'utilisateur est connecté -->
             {% else %}
-              <img width="20px" height="20px" src="{% static 'images/supprimer.png' %}">
+              <img width="20px" height="20px" src="{% static 'images/supprimer.png' %}">  <!-- Icône affichée lorsque l'utilisateur n'est pas connecté -->
             {% endif %}
           </p>
         </div>
-        <a class="btn btn-primary" href="{% url 'supprimer_personnel' personnel.id %}" role="button">Supprimer</a>
-        <a class="btn btn-primary" href="{% url 'edit_personnel' personnel.id %}" role="button">Modifier</a>
+        <a class="btn btn-primary" href="{% url 'supprimer_personnel' personnel.id %}" role="button">Supprimer</a>  <!-- Bouton de suppression avec un lien vers la page de suppression du personnel -->
+        <a class="btn btn-primary" href="{% url 'edit_personnel' personnel.id %}" role="button">Modifier</a>  <!-- Bouton de modification avec un lien vers la page de modification du personnel -->
     </div>
-{% endblock %} 
+{% endblock %}  <!-- Fin du bloc de contenu -->
